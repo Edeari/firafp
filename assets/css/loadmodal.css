@@ -1,0 +1,22 @@
+.modal-fullscreen {
+  background: transparent;
+  width: 100%;
+}
+.modal-fullscreen .modal-content {
+  background: transparent;
+  border: 0;
+  -webkit-box-shadow: none;
+  box-shadow: none;
+  text-align: center;
+  color: #fff;
+  width: 100%;
+  position: absolute;
+  margin-top: 100px;
+}
+.modal-backdrop.modal-backdrop-fullscreen {
+  background: #ffffff;
+}
+.modal-backdrop.modal-backdrop-fullscreen.in {
+  opacity: .97;
+  filter: alpha(opacity=97);
+}

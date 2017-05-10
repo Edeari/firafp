@@ -1,0 +1,54 @@
+.badge-notify{
+   background:red;
+   position:relative;
+}
+
+.square-input{
+    border-radius: 0px !important;
+}
+
+.square-btn{
+    border-radius: 0px !important;
+}
+
+.icon-flipped {
+    transform: scaleX(-1);
+    -moz-transform: scaleX(-1);
+    -webkit-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+}
+
+.centered-box{
+    text-align: center;
+}
+
+.CodeMirror {
+	height: 100px !important;
+}
+
+.custom-menu li a{
+    padding: 10px 15px !important;
+}
+
+.custom-menu li a:first{
+    border-top: 1px solid #efefef !important;
+}
+
+.custom-menu li a{
+    color: #777 !important;
+    border-bottom: 1px solid #efefef;
+}
+
+.custom-menu li a:hover{
+    color:#111 !important;
+    background-color: #efefef !important;
+}
+
+.nav ul li a{
+    padding: 10px 15px !important;
+}
+
+.nav ul li a:hover{
+    color:#111 !important;
+    background-color: #efefef !important;
+}
