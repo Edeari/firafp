@@ -4,7 +4,7 @@
             <div class="col-xs-12">
 
                 <div class="form-wrap">
-                    <?php if(!$error){ ?>
+                    <?php if(isset($error) && !$error){ ?>
                         <div class="alert alert-danger" role="alert">
                             <span class="glyphicon glyphicon-warning-sign"></span>
                             L'usuari o la contrasenya son incorrectes

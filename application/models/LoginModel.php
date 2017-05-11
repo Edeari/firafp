@@ -12,13 +12,10 @@ class LoginModel extends CI_Model {
         $query = $this->db->get_where('users', array('username' => $username));
         $user = $query->row_array();
 
-        if($user['pass'] == $pass && $user!=NULL){
+        if($user['pass'] == sha1($pass) && $user!=NULL){
             return true;
         } else {
             return false;
         }
     }
-
-
-
 }

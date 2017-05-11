@@ -30,9 +30,11 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="<?php echo base_url('admin/families') ?>"><i class="fa fa-user"></i>  Usuaris</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Benvingut, <span class="glyphicon glyphicon-user"></span> <strong><?php echo $this->session->userdata('username'); ?></strong></a>
                     <ul class="dropdown-menu">
+                        <li><a href="#" data-toggle="modal" data-target="#changePass"><i class="fa fa-key"></i> Canviar contrasenya</a></li>
                         <li><a href="#" data-toggle="modal" data-target="#logoutModal"><i class="fa fa-sign-out"></i> Tancar sessió</a></li>
                     </ul>
                 </li>
@@ -56,5 +58,43 @@
                 <a class="btn btn-warning" href="<?php echo base_url('login/out') ?>"><i class="fa fa-sign-out"></i> Tancar sessió</a>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="modal fade" id="changePass" tabindex="-1" role="dialog" aria-labelledby="changePass">
+    <div class="modal-dialog" role="document">
+        <?php echo form_open(base_url('changePass'), 'id="change_pass_form"'); ?>
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Canvi de contrasenya</h4>
+            </div>
+            <div class="modal-body">
+                <fieldset>
+                    <div class="form-group">
+                        <label class="form-label">Nova contrasenya</label>
+                        <input class="form-control" type="text" placeholder="Introduiu la nova contrasenya" name="newpass"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Repetir nova contrasenya</label>
+                        <input class="form-control" type="text" placeholder="Repetiu la nova contrasenya" name="newpass2"/>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Contrasenya antiga</label>
+                        <input class="form-control" type="text" placeholder="Introduiu la contrasenya anterior" name="actualpass"/>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> Cancel·lar</button>
+                <button type="button" class="btn btn-warning" data-toggle="collapse" data-target="#confirm"><i class="fa fa-key"></i> Canviar contrasenya</button>
+            </div>
+            <div id="confirm" class="modal-footer collapse" style="text-align:center!important">
+                <h4>Segur que vols canviar la contrasenya?</h4>
+                <button type="button" class="btn btn-default" data-dismiss="modal"><i class="fa fa-times"></i> No</button>
+                <button type="submit" class="btn btn-warning"><i class="fa fa-check"></i> Sí</button>
+            </div>
+        </div>
+        </form>
     </div>
 </div>

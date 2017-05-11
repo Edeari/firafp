@@ -52,3 +52,17 @@
     color:#111 !important;
     background-color: #efefef !important;
 }
+
+.status-msg {
+   padding: 40px 15px;
+   text-align: center;
+}
+
+.status-action {
+   margin-top:15px;
+   margin-bottom:15px;
+}
+
+.status-details {
+   font-size: 17px;
+}

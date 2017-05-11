@@ -8,14 +8,16 @@ $route['translate_uri_dashes'] = FALSE;
 $route['fitxes'] = 'FitxapdfController/fitxa';
 $route['fitxa'] = 'FitxapdfController/fitxa';
 // codicentre 8 digits code, Lleida codes starts with 25
-$route['fitxa/(25[0-9]{6})'] = 'FitxapdfController/fitxacentre/$1'; 
-$route['fitxa/centres'] = 'FitxapdfController/fitxacentre'; 
+$route['fitxa/(25[0-9]{6})'] = 'FitxapdfController/fitxacentre/$1';
+$route['fitxa/centres'] = 'FitxapdfController/fitxacentre';
 $route['fitxa/([a-z]+)'] = 'FitxapdfController/fitxa/$1';
 
 $route['home'] = 'HomeController/index';
 
 $route['login'] = 'LoginController/login';
 $route['login/out'] = 'LoginController/logout';
+
+$route['changePass'] = 'HomeController/changePass';
 
 $route['admin/(:any)'] = 'AdminController/index/$1';
 $route['admin/delete/(:any)/(:any)'] = "AdminController/deleteRegister/$1/$2";
