@@ -65,7 +65,7 @@
                                     <i class="fa fa-file-pdf-o"></i> Generar PDF
                                 </a>
                             </li>
-                            <?php } ?>
+                        <?php } ?>
                         <?php if($database=='centers') { ?>
                             <li style="border-left: solid 3px #65C9E5;">
                                 <a href="<?php echo base_url('centres_estudis/{{dada.id}}'); ?>">
@@ -75,6 +75,13 @@
                             <li style="border-left: solid 3px #C581F0;">
                                 <a href="<?php echo base_url('fitxa/{{dada.codicentre}}');?>" target="_blank">
                                     <i class="fa fa-file-pdf-o"></i> Generar PDF
+                                </a>
+                            </li>
+                        <?php } ?>
+                        <?php if($database=='studies') { ?>
+                            <li style="border-left: solid 3px #65C9E5;">
+                                <a href="<?php echo base_url('estudis_centres/{{dada.id}}'); ?>">
+                                    <i class="fa fa-university"></i> Administrar centres
                                 </a>
                             </li>
                         <?php } ?>
