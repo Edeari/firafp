@@ -10,6 +10,10 @@
         <hr />
     </div>
 
+    <div class="col-md-12">
+        {{editCurrent.name}}
+    </div>
+
 
     <div class="col-md-6">
         <div class="list-group">
@@ -17,7 +21,7 @@
             <h4 ng-show="centres.length==0">No hi ha estudis</h4>
             <input ng-hide="centres.length==0" type="search" class="form-control square-input" ng-init="buscarEstudi=''" placeholder="Buscar centre per..." ng-model="buscarEstudi"/>
 
-            <a ng-click="editCurrentStudy(estudis);" href="#" data-toggle="modal" data-target="#currentModal" class="list-group-item" ng-repeat="estud in estudis | filter: buscarEstudi | orderBy:['estudis.name','estudis.type']">
+            <a ng-click="editCurrentStudy(estud);" href="#" data-toggle="modal" data-target="#currentModal" class="list-group-item" ng-repeat="estud in estudis | filter: buscarEstudi | orderBy:['estudis.name','estudis.type']">
                 {{estud.name}}
                 <span class="badge">{{estud.location}}</span>
                 <span ng-show="estud.dual==1" class="badge" style="background:#73428B">Dual</span>
@@ -52,7 +56,7 @@
             </div>
 
             <div ng-repeat="cent in centres | filter: buscarSegEstudi">
-                <a ng-show="$index>=inici2 && $index<=final2" ng-click="addCenterList(cent)" href="<?php //echo base_url('estudis_centres/add/'.$centre.'/{{cent.id}}'); ?>" class="list-group-item item-todisable" >
+                <a ng-show="$index>=inici2 && $index<=final2" ng-click="addCenterList(cent)" href="#" class="list-group-item" >
                     {{cent.name}}
                     <span class="badge">{{cent.location}}</span>
                 </a>
@@ -82,7 +86,49 @@
         </div>
     </div>
 
-    <div class="modal fade" id="addCentersModal" tabindex="-1" role="dialog" aria-labelledby="addCentersModal">
+    <div class="modal fade" id="currentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <?php echo form_open(base_url('estudis_centres/modify/'.$estudi), 'id="edit_form"'); ?>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        {{editCurrent.name}}
+                        <span class="badge">{{editCurrent.location}}</span>
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <input type="hidden" name="idcentre" value="{{editCurrent.id}}"/>
+                        <input type="hidden" name="idestudi" value="<?php echo $estudi ?>"/>
+                        <input type="hidden" id="currentObservation" value="{{editCurrent.observation}}" />
+                        <label>Observacions</label>
+
+                        <textarea id="markdown" name="observation"></textarea>
+
+                        <span class="button-checkbox">
+                            <button type="button" class="btn" data-color="primary">Estudi opció dual</button>
+                            <input type="checkbox" class="hidden" name="dual"/>
+                        </span>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">
+                        <i class="fa fa-times"></i> Tancar
+                    </button>
+                    <a class="btn btn-danger" href="<?php echo base_url('estudis_centres/delete/'.$estudi.'/{{editCurrent.id}}'); ?>">
+                        <i class="fa fa-trash-o"></i> Eliminar
+                    </a>
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fa fa-floppy-o"></i> Guardar
+                    </button>
+                </div>
+            </div>
+        </div>
+        </form>
+    </div>
+
+    <div class="modal fade" id="addCentersModal" tabindex="-2" role="dialog" aria-labelledby="addCentersModal">
         <?php echo form_open(base_url('estudis_centres/addCenters/'.$estudi), 'id="add_centers"'); ?>
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -122,57 +168,16 @@
 
 
 
-    <div class="modal fade" id="currentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-        <?php echo form_open(base_url('centres_estudis/modify/'.$estudi), 'id="edit_form"'); ?>
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                    <h4 class="modal-title" id="myModalLabel">
-                        {{editCurrent.name}}
-                        <span class="badge">{{editCurrent.location}}</span>
-                    </h4>
-                </div>
-                <div class="modal-body">
-                    <div class="form-group">
-                        <input type="hidden" name="idcentre" value="<?php echo $estudi ?>"/>
-                        <input type="hidden" name="idestudi" value="{{editCurrent.id}}"/>
-                        <input type="hidden" id="currentObservation" value="{{editCurrent.observation}}" />
-                        <label>Observacions</label>
 
-                        <textarea id="markdown" name="observation"></textarea>
-
-                        <span class="button-checkbox">
-                            <button type="button" class="btn" data-color="primary">Estudi opció dual</button>
-                            <input type="checkbox" class="hidden" name="dual"/>
-                        </span>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">
-                        <i class="fa fa-times"></i> Tancar
-                    </button>
-                    <a class="btn btn-danger" href="<?php echo base_url('estudis_centres/delete/'.$estudi.'/{{editCurrent.id}}'); ?>">
-                        <i class="fa fa-trash-o"></i> Eliminar
-                    </a>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-floppy-o"></i> Guardar
-                    </button>
-                </div>
-            </div>
-        </div>
-        </form>
-    </div>
 </div>
 
 
 <script>
 app.controller('CentresEstudis', function($scope) {
+    $scope.editCurrent = null;
     $scope.estudis = <?php echo $dades; ?>;
     $scope.centres = <?php echo $centres; ?>;
-    $scope.addCenters = false;
     $scope.centersToPush = [];
-    $scope.centersToPushString = '';
 
     $scope.inici2 = 0;
     $scope.final2 = 7;
@@ -199,15 +204,12 @@ app.controller('CentresEstudis', function($scope) {
     };
 
     $scope.editCurrentStudy = function(current){
-        $scope.editCurrent = current[0];
-        debugger;
+        $scope.editCurrent = current;
         $scope.simplemde.value($scope.editCurrent.observation);
     };
 
     $scope.addCenterList = function(center){
-        if($scope.centersToPush.indexOf(center) !== -1){
-            console.log("ya existe");
-        } else {
+        if($scope.centersToPush.indexOf(center) === -1){
             $scope.centersToPush.push(center);
         }
     };
@@ -221,7 +223,6 @@ app.controller('CentresEstudis', function($scope) {
         angular.forEach($scope.centersToPush, function(center, key){
             $scope.centersToPushString += center.id+"-";
         });
-        console.log($scope.centersToPushString);
     };
 
     $scope.resetCenters = function(){
