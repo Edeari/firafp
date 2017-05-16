@@ -102,3 +102,17 @@
   color: #fff;
   margin-bottom: 2px;
 }
+
+.link-cursor:hover{
+  color: #ddd;
+}
+
+.link-cursor{
+  cursor: pointer;
+}
+
+.custom-badge{
+  padding: 12px 10px !important;
+  font-size: 14px !important;
+  margin: 5px !important;
+}

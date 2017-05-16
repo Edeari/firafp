@@ -32,6 +32,7 @@ $route['centres_estudis/modify/(:any)'] = 'CentresEstudisController/editDataStud
 $route['estudis_centres/(:any)'] = 'EstudisCentresController/index/$1';
 $route['estudis_centres/add/(:any)/(:any)'] = 'EstudisCentresController/addStudy/$1/$2';
 $route['estudis_centres/delete/(:any)/(:any)'] = 'EstudisCentresController/deleteStudy/$1/$2';
+$route['estudis_centres/addCenters/(:any)'] = 'EstudisCentresController/addAllCenters/$1';
 
 $route['apirest/allregisters/(:any)']['GET'] = 'REST/RESTController/getDades/$1';
 $route['apirest/familiestudies-(:any)']['GET'] = 'REST/RESTController/getFamiliesWithStudies/$1';

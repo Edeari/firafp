@@ -26,7 +26,7 @@ class EstudisCentresController extends CI_Controller {
 
 		$data['dades'] = $this->EstudisCentresModel->getRegisters($slug);
 		$data['centres'] = $this->EstudisCentresModel->getAllCenters($slug);
-		$data['centre'] = $slug;
+		$data['estudi'] = $slug;
 		$data['nomestudi'] = $this->EstudisCentresModel->getStudyName($slug);
 
 		$this->createTemplate('EstudisCentresView', $data);
@@ -45,6 +45,11 @@ class EstudisCentresController extends CI_Controller {
 	public function editDataStudy($centre){
 		$this->EstudisCentresModel->editDataStudy();
 		$this->index($centre);
+	}
+
+	public function addAllCenters($estudi){
+		$this->EstudisCentresModel->addAllCenters($estudi);
+		$this->index($estudi);
 	}
 
 }
