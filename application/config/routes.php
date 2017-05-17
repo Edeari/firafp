@@ -28,6 +28,7 @@ $route['centres_estudis/(:any)'] = 'CentresEstudisController/index/$1';
 $route['centres_estudis/add/(:any)/(:any)'] = 'CentresEstudisController/addStudy/$1/$2';
 $route['centres_estudis/delete/(:any)/(:any)'] = 'CentresEstudisController/deleteStudy/$1/$2';
 $route['centres_estudis/modify/(:any)'] = 'CentresEstudisController/editDataStudy/$1';
+$route['centres_estudis/addStudies/(:any)'] = 'CentresEstudisController/addAllStudies/$1';
 
 $route['estudis_centres/(:any)'] = 'EstudisCentresController/index/$1';
 $route['estudis_centres/add/(:any)/(:any)'] = 'EstudisCentresController/addStudy/$1/$2';

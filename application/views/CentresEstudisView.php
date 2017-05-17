@@ -1,40 +1,3 @@
-<script>
-app.controller('CentresEstudis', function($scope) {
-    $scope.centres = <?php echo $dades; ?>;
-    $scope.estudis = <?php echo $estudis; ?>;
-
-    $scope.inici2 = 0;
-    $scope.final2 = 7;
-
-    $scope.simplemde = new SimpleMDE({ element: document.getElementById("markdown")});
-
-    $scope.resetValues2 = function(){
-        $scope.inici2 = 0;
-        $scope.final2 = 7;
-    };
-
-    $scope.lessValues2 = function(){
-        if($scope.inici2>0){
-            $scope.inici2 -= 8;
-            $scope.final2 -= 8;
-        }
-    };
-
-    $scope.addValues2 = function(){
-        if($scope.final2<$scope.estudis.length){
-            $scope.inici2 += 8;
-            $scope.final2 += 8;
-        }
-    };
-
-    $scope.editCurrentStudy = function(current){
-        $scope.editCurrent = current;
-        $scope.simplemde.value($scope.editCurrent.observation);
-    };
-
-});
-</script>
-
 <div class="container" ng-controller="CentresEstudis">
     <div class="col-md-12">
         <a href="<?php echo base_url('admin/centers'); ?>" class="btn btn-default">
@@ -92,14 +55,75 @@ app.controller('CentresEstudis', function($scope) {
             </div>
 
             <div ng-repeat="estud in estudis | filter: buscarSegEstudi | orderBy:['estud.type','estud.name']">
-                <a ng-show="$index>=inici2 && $index<=final2" href="<?php echo base_url('centres_estudis/add/'.$centre.'/{{estud.id}}'); ?>" class="list-group-item" >
+                <button ng-show="$index>=inici2 && $index<=final2" ng-click="addCenterList(estud)" href="#" class="list-group-item" >
                     {{estud.name}}
                     <span ng-show="estud.type=='fpgm'" class="badge" style="background:#E44646">CFGM</span>
                     <span ng-show="estud.type=='fpgs'" class="badge" style="background:#5AB4DD">CFGS</span>
                     <span ng-show="estud.type=='re'" class="badge" style="background:#E9DA53">RE</span>
-                </a>
+                </button>
+            </div>
+
+            <div class="panel panel-default" style="margin-top: 10px;" ng-show="studiesToPush.length>0">
+                <div class="panel-heading">
+                    <span><strong>Llista d'estudis a afegir</strong></span>
+                </div>
+                <div class="panel-body">
+                    <span class="badge custom-badge" ng-repeat="study in studiesToPush" id="study.id">
+                        {{study.name | limitTo: 55}}{{study.name.length > 55 ? '...' : ''}}
+                        <i ng-click="removeCenterList(center)" class="fa fa-times-circle fa-lg link-cursor"></i>
+                    </span>
+                </div>
+                <div class="panel-footer">
+                    <button ng-click="resetCenters();" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancel·lar
+                    </button>
+                    <button ng-click="pushStudies();" id="save_button" data-toggle="modal" data-target="#addStudiesModal" class="btn btn-primary">
+                        <i class="fa fa-plus-circle"></i>
+                        Afegir
+                    </button>
+                </div>
             </div>
         </div>
+    </div>
+
+    <div class="modal fade" id="addStudiesModal" tabindex="-2" role="dialog" aria-labelledby="addStudiesModal">
+        <?php echo form_open(base_url('centres_estudis/addStudies/'.$centre), 'id="add_studies"'); ?>
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">
+                        Desitja afegir els centres?
+                    </h4>
+                </div>
+                <div class="modal-body">
+                    <h4>Afegiràs els següents centres als estudis "<strong><?php echo $nomcentre['name']; ?></strong>", estàs segur?</h4>
+                    <hr />
+                    <strong>Llistat d'estudis a afegir</strong>
+                    <ul class="list-group">
+                        <li class="list-group-item" ng-repeat="study in studiesToPush">
+                            <span ng-show="study.type=='fpgm'" class="badge" style="background:#E44646">CFGM</span>
+                            <span ng-show="study.type=='fpgs'" class="badge" style="background:#5AB4DD">CFGS</span>
+                            <span ng-show="study.type=='re'" class="badge" style="background:#E9DA53">RE</span>
+                            {{study.name}}
+                        </li>
+                    </ul>
+                    <input type="hidden" name="studies" value="{{studiesToPushString}}" />
+                </div>
+                <div class="modal-footer">
+                    <button type="button" data-dismiss="modal" class="btn btn-default">
+                        <i class="fa fa-times"></i>
+                        Cancel·lar
+                    </button>
+                    <button id="save_button" name="save_button" class="btn btn-primary" type="submit">
+                        <i class="fa fa-plus-circle"></i>
+                        Afegir
+                    </button>
+                </div>
+            </div>
+        </div>
+        </form>
     </div>
 
     <div class="modal fade" id="currentModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
@@ -122,16 +146,7 @@ app.controller('CentresEstudis', function($scope) {
                         <input type="hidden" name="idestudi" value="{{editCurrent.id}}"/>
                         <input type="hidden" id="currentObservation" value="{{editCurrent.observation}}" />
                         <label>Observacions</label>
-                        <script>
-                            //var simplemde;
-                        </script>
-
                         <textarea id="markdown" name="observation"></textarea>
-
-                        <script>
-
-                        </script>
-
                         <span class="button-checkbox">
                             <button type="button" class="btn" data-color="primary">Estudi opció dual</button>
                             <input type="checkbox" class="hidden" name="dual" />
@@ -154,3 +169,71 @@ app.controller('CentresEstudis', function($scope) {
         </form>
     </div>
 </div>
+
+
+</div>
+
+<script>
+app.controller('CentresEstudis', function($scope) {
+    $scope.centres = <?php echo $dades; ?>;
+    $scope.estudis = <?php echo $estudis; ?>;
+    $scope.studiesToPush = [];
+
+    $scope.inici2 = 0;
+    $scope.final2 = 7;
+
+    $scope.simplemde = new SimpleMDE({ element: document.getElementById("markdown")});
+
+    $scope.resetValues2 = function(){
+        $scope.inici2 = 0;
+        $scope.final2 = 7;
+    };
+
+    $scope.lessValues2 = function(){
+        if($scope.inici2>0){
+            $scope.inici2 -= 8;
+            $scope.final2 -= 8;
+        }
+    };
+
+    $scope.addValues2 = function(){
+        if($scope.final2<$scope.estudis.length){
+            $scope.inici2 += 8;
+            $scope.final2 += 8;
+        }
+    };
+
+    $scope.editCurrentStudy = function(current){
+        $scope.editCurrent = current;
+        $scope.simplemde.value($scope.editCurrent.observation);
+    };
+
+    $scope.addCenterList = function(study){
+        if($scope.studiesToPush.indexOf(study) === -1){
+            $scope.studiesToPush.push(study);
+        }
+    };
+
+    $scope.removeCenterList = function(study){
+        $scope.studiesToPush.splice($scope.studiesToPush.indexOf(study), 1);
+    };
+
+    $scope.pushStudies = function(){
+        $scope.studiesToPushString = '';
+        angular.forEach($scope.studiesToPush, function(study, key){
+            $scope.studiesToPushString += study.id+"-";
+        });
+    };
+
+    $scope.resetCenters = function(){
+        $scope.studiesToPush = [];
+    };
+
+});
+</script>
+
+<script>
+$(document).ready(function(){
+    $('[data-toggle="tooltip"]').tooltip();
+});
+</script>

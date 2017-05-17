@@ -47,4 +47,9 @@ class CentresEstudisController extends CI_Controller {
 		$this->index($centre);
 	}
 
+	public function addAllStudies($centre){
+		$this->CentresEstudisModel->addAllStudies($centre);
+		$this->index($centre);
+	}
+
 }

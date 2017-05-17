@@ -72,4 +72,16 @@ class CentresEstudisModel extends CI_Model {
 		$this->db->update('centers_studies');
 	}
 
+	public function addAllStudies($center){
+		$studiesArray = explode("-", $this->input->post('studies'));
+		foreach (array_filter($studiesArray) as $key => $study) {
+			$data = array(
+		        'idcenter' => $center,
+		        'idstudy' => $study
+			);
+
+			$this->db->insert('centers_studies', $data);
+		}
+	}
+
 }
