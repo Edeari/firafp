@@ -116,3 +116,7 @@
   font-size: 14px !important;
   margin: 5px !important;
 }
+
+.menu-selected{
+    background-color: #ffc907 !important;
+}

@@ -70,7 +70,7 @@
                 <div class="panel-body">
                     <span class="badge custom-badge" ng-repeat="study in studiesToPush" id="study.id">
                         {{study.name | limitTo: 55}}{{study.name.length > 55 ? '...' : ''}}
-                        <i ng-click="removeCenterList(center)" class="fa fa-times-circle fa-lg link-cursor"></i>
+                        <i ng-click="removeStudyList(study)" class="fa fa-times-circle fa-lg link-cursor"></i>
                     </span>
                 </div>
                 <div class="panel-footer">
@@ -214,7 +214,7 @@ app.controller('CentresEstudis', function($scope) {
         }
     };
 
-    $scope.removeCenterList = function(study){
+    $scope.removeStudyList = function(study){
         $scope.studiesToPush.splice($scope.studiesToPush.indexOf(study), 1);
     };
 

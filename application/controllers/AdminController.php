@@ -14,7 +14,7 @@ class AdminController extends CI_Controller {
 
 	public function createTemplate($page, $data){
 		$this->load->view('templates/header');
-		$this->load->view('templates/menu');
+		$this->load->view('templates/menu', $data);
 		$this->load->view($page, $data);
 		$this->load->view('NewRegisterView', $data);
 		$this->load->view('templates/footer');
@@ -30,7 +30,35 @@ class AdminController extends CI_Controller {
 		$data['truecolumnes'] = $this->AdminModel->getTrueTableHeader($table);
 		$data['database'] = $table;
 		$data['families'] = $this->AdminModel->getTable('families');
+		$data['title'] = $this->setTitle($table);
 		$this->createTemplate('AdminView', $data);
+	}
+
+	public function setTitle($table){
+		$pageTitle = null;
+
+		switch ($table) {
+			case 'families':
+				$pageTitle = "Administrant les famílies";
+				break;
+			case 'centers':
+				$pageTitle = "Administrant els centres";
+				break;
+			case 'studies':
+				$pageTitle = "Administrant els estudis";
+				break;
+			case 'diary':
+				$pageTitle = "Administrant l'agenda";
+				break;
+			case 'contets':
+				$pageTitle = "Administrant els concursos";
+				break;
+			case 'news':
+				$pageTitle = "Administrant les notícies";
+				break;
+		}
+
+		return $pageTitle;
 	}
 
 	public function deleteRegister($table, $id){

@@ -56,10 +56,10 @@
             </div>
 
             <div ng-repeat="cent in centres | filter: buscarSegEstudi">
-                <a ng-show="$index>=inici2 && $index<=final2" ng-click="addCenterList(cent)" href="#" class="list-group-item" >
+                <button ng-show="$index>=inici2 && $index<=final2" ng-click="addCenterList(cent)" class="list-group-item" >
                     {{cent.name}}
                     <span class="badge">{{cent.location}}</span>
-                </a>
+                </button>
             </div>
 
             <div class="panel panel-default" style="margin-top: 10px;" ng-show="centersToPush.length>0">

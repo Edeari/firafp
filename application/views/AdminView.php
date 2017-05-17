@@ -1,6 +1,7 @@
 <script>
     app.controller('AdminisController', function($scope) {
         $scope.dades = <?php echo $dades; ?>;
+        $scope.pageTitle = '<?php echo $title; ?>';
 
         $scope.setCurrentDelete = function(currentDel){
             $scope.currentDelete = currentDel;
@@ -9,8 +10,12 @@
 </script>
 <div class="container" ng-controller="AdminisController">
 
-    <div class="input-group" style="margin-bottom: 15px !important;">
-        <span class="input-group-addon" id="basic-addon1">
+    <div class="col-md-12">
+        <h2>{{pageTitle}}</h2>
+        <hr />
+    </div>
+    <div class="input-group" style="margin-bottom: 2px !important;">
+        <span class="input-group-addon" id="basic-addon1" style="background-color: #fff">
             <i class="fa fa-search"></i>
         </span>
         <input type="search" class="form-control square-input" ng-init="buscarDada=''" placeholder="Buscar registre per qualsevol de les seves dades..." ng-model="buscarDada"/>
