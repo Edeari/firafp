@@ -17,6 +17,9 @@ class LoginController extends CI_Controller {
 	}
 
 	public function index(){
+		if($this->session->username){
+            redirect(base_url('admin/centers'), 'refresh');
+        }
         $data['error'] = TRUE;
 		$this->createTemplate('LoginView', $data);
 	}
