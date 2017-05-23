@@ -20,10 +20,18 @@ class AdminController extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
-	public function index($table = NULL){
+	public function checkSession(){
 		if(!$this->session->username){
             redirect(base_url('login'), 'refresh');
         }
+	}
+
+	public function checkRoleLevel(){
+
+	}
+
+	public function index($table = NULL){
+		$this->checkSession();
 
 		$data['dades'] = $this->AdminModel->getTable($table);
 		$data['columnes'] = $this->AdminModel->getTableHeader($table);
@@ -48,7 +56,7 @@ class AdminController extends CI_Controller {
 				$pageTitle = "Administrant els estudis";
 				break;
 			case 'diary':
-				$pageTitle = "Administrant l'agenda";
+				$pageTitle = "Administrant l\'agenda";
 				break;
 			case 'contets':
 				$pageTitle = "Administrant els concursos";
@@ -62,7 +70,10 @@ class AdminController extends CI_Controller {
 	}
 
 	public function deleteRegister($table, $id){
-		$this->AdminModel->deleteRegister($table, $id);
+		$this->checkSession();
+		if($this->session->level >= 5){
+			$this->AdminModel->deleteRegister($table, $id);
+		}
 		$this->index($table);
 	}
 

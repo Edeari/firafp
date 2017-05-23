@@ -24,6 +24,12 @@ $route['admin/delete/(:any)/(:any)'] = "AdminController/deleteRegister/$1/$2";
 
 $route['editar/(:any)/(:any)'] = 'EditController/index/$1/$2';
 
+$route['usuaris'] = 'UsersController/index';
+$route['usuaris/edituser'] = 'UsersController/editUser';
+$route['usuaris/editrole'] = 'UsersController/editRole';
+$route['usuaris/delete'] = 'UsersController/deleteUser';
+$route['usuaris/add'] = 'UsersController/addUser';
+
 $route['centres_estudis/(:any)'] = 'CentresEstudisController/index/$1';
 $route['centres_estudis/add/(:any)/(:any)'] = 'CentresEstudisController/addStudy/$1/$2';
 $route['centres_estudis/delete/(:any)/(:any)'] = 'CentresEstudisController/deleteStudy/$1/$2';

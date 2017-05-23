@@ -30,7 +30,9 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
-                <li><a href="<?php echo base_url('admin/families') ?>"><i class="fa fa-user"></i>  Usuaris</a></li>
+                <?php if($this->session->level == 10) { ?>
+                    <li><a href="<?php echo base_url('usuaris') ?>"><i class="fa fa-user"></i>  Usuaris</a></li>
+                <?php } ?>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Benvingut, <span class="glyphicon glyphicon-user"></span> <strong><?php echo $this->session->userdata('username'); ?></strong></a>
                     <ul class="dropdown-menu">

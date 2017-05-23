@@ -16,10 +16,14 @@ class LoginController extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
-	public function index(){
-		if($this->session->username){
+	public function checkSession(){
+		if(!$this->session->username){
             redirect(base_url('admin/centers'), 'refresh');
         }
+	}
+
+	public function index(){
+		$this->checkSession();
         $data['error'] = TRUE;
 		$this->createTemplate('LoginView', $data);
 	}
@@ -34,7 +38,8 @@ class LoginController extends CI_Controller {
         $session_status = $this->LoginModel->check_login($username, $pass);
 
         if($session_status){
-            $this->sessionStart($username, $pass);
+            $level = $this->LoginModel->getLevel($username);
+            $this->sessionStart($username, $pass, $level);
         }
 
         $data['session'] = $this->session;
@@ -47,10 +52,11 @@ class LoginController extends CI_Controller {
         }
     }
 
-    private function sessionStart($username, $pass){
+    private function sessionStart($username, $pass, $level){
         $userData = array(
             'username'  => $username,
-            'pass'      => $pass
+            'pass'      => $pass,
+            'level'     => $level
         );
 
         $this->session->set_userdata($userData);

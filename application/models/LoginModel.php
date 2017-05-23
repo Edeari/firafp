@@ -18,4 +18,11 @@ class LoginModel extends CI_Model {
             return false;
         }
     }
+
+	public function getLevel($username){
+		$query = $this->db->get_where('users', array('username' => $username));
+        $user = $query->row_array();
+
+        return $user['level'];
+	}
 }

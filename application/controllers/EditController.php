@@ -19,10 +19,14 @@ class EditController extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
-	public function index($table = NULL, $slug = NULL){
+	public function checkSession(){
 		if(!$this->session->username){
             redirect(base_url('login'), 'refresh');
         }
+	}
+
+	public function index($table = NULL, $slug = NULL){
+		$this->checkSession();
 
 		if($slug === 'save_register'){
 			$data['dades'] = $this->EditModel->saveRegister($table);

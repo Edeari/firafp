@@ -19,10 +19,14 @@ class CentresEstudisController extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
-	public function index($slug = NULL){
+	public function checkSession(){
 		if(!$this->session->username){
-			redirect(base_url('login'), 'refresh');
-		}
+            redirect(base_url('login'), 'refresh');
+        }
+	}
+
+	public function index($slug = NULL){
+		$this->checkSession();
 
 		$data['dades'] = $this->CentresEstudisModel->getRegisters($slug);
 		$data['estudis'] = $this->CentresEstudisModel->getAllStudies($slug);
@@ -33,21 +37,27 @@ class CentresEstudisController extends CI_Controller {
 	}
 
 	public function addStudy($centre, $estudi){
+		$this->checkSession();
 		$this->CentresEstudisModel->addStudy($centre, $estudi);
 		$this->index($centre);
 	}
 
 	public function deleteStudy($centre, $estudi){
-		$this->CentresEstudisModel->deleteStudy($centre, $estudi);
+		$this->checkSession();
+		if($this->session->level >= 5){
+			$this->CentresEstudisModel->deleteStudy($centre, $estudi);
+		}
 		$this->index($centre);
 	}
 
 	public function editDataStudy($centre){
+		$this->checkSession();
 		$this->CentresEstudisModel->editDataStudy();
 		$this->index($centre);
 	}
 
 	public function addAllStudies($centre){
+		$this->checkSession();
 		$this->CentresEstudisModel->addAllStudies($centre);
 		$this->index($centre);
 	}

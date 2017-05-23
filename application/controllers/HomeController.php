@@ -18,7 +18,14 @@ class HomeController extends CI_Controller {
 		$this->load->view('templates/footer');
 	}
 
+	public function checkSession(){
+		if(!$this->session->username){
+            redirect(base_url('login'), 'refresh');
+        }
+	}
+
 	public function changePass(){
+		$this->checkSession();
 		if($this->HomeModel->checkPass()){
 			$this->HomeModel->changePass();
 			$this->logout();
@@ -31,10 +38,7 @@ class HomeController extends CI_Controller {
 	}
 
 	public function index(){
-		if(!$this->session->username){
-            redirect(base_url('login'), 'refresh');
-        }
-		// $data['dades'] = $this->HomeModel->getTable();
+		$this->checkSession();
 		$data['var'] = "Fira FT";
 		$this->createTemplate('HomeView', $data);
 	}
