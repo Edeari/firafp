@@ -21,6 +21,7 @@ $route['changePass'] = 'HomeController/changePass';
 
 $route['admin/(:any)'] = 'AdminController/index/$1';
 $route['admin/delete/(:any)/(:any)'] = "AdminController/deleteRegister/$1/$2";
+$route['admin/diary/clone'] = 'AdminController/cloneEvent';
 
 $route['editar/(:any)/(:any)'] = 'EditController/index/$1/$2';
 

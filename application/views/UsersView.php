@@ -21,7 +21,7 @@
                     <th>Rol</th>
                     <th style="text-align: right">Opcions</th>
                 </tr>
-                <tr ng-repeat="usuari in usuaris | filter: buscarDada">
+                <tr ng-repeat="usuari in usuaris | filter: buscarDada" ng-show="usuari.username != '<?php echo $this->session->username; ?>'">
                     <td>
                         <i class="fa fa-user fa-lg"></i> {{usuari.username}}
                     </td>

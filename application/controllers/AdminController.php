@@ -8,8 +8,8 @@ class AdminController extends CI_Controller {
 		$this->load->model('AdminModel');
 		$this->load->helper('url');
 		$this->load->library('session');
-		$this->load->library('form_validation');
 		$this->load->helper('form');
+		$this->load->library('form_validation');
 	}
 
 	public function createTemplate($page, $data){
@@ -26,10 +26,6 @@ class AdminController extends CI_Controller {
         }
 	}
 
-	public function checkRoleLevel(){
-
-	}
-
 	public function index($table = NULL){
 		$this->checkSession();
 
@@ -40,6 +36,20 @@ class AdminController extends CI_Controller {
 		$data['families'] = $this->AdminModel->getTable('families');
 		$data['title'] = $this->setTitle($table);
 		$this->createTemplate('AdminView', $data);
+	}
+
+	public function deleteRegister($table, $id){
+		$this->checkSession();
+		if($this->session->level >= 5){
+			$this->AdminModel->deleteRegister($table, $id);
+		}
+		$this->index($table);
+	}
+
+	public function cloneEvent(){
+		$this->checkSession();
+		$this->AdminModel->cloneEvent();
+		$this->index('diary');
 	}
 
 	public function setTitle($table){
@@ -69,12 +79,6 @@ class AdminController extends CI_Controller {
 		return $pageTitle;
 	}
 
-	public function deleteRegister($table, $id){
-		$this->checkSession();
-		if($this->session->level >= 5){
-			$this->AdminModel->deleteRegister($table, $id);
-		}
-		$this->index($table);
-	}
+
 
 }

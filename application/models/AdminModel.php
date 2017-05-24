@@ -39,4 +39,19 @@ class AdminModel extends CI_Model {
 		$this->db->delete($table, array('id' => $id));
 	}
 
+	public function cloneEvent(){
+		$event = array(
+	        'data' => $this->input->post('data'),
+	        'hora' => $this->input->post('hora'),
+	        'durada' => $this->input->post('durada'),
+	        'horari_mida' => $this->input->post('horari_mida'),
+	        'name' => $this->input->post('name'),
+	        'organitza' => $this->input->post('organitza'),
+	        'ubicacio' => $this->input->post('ubicacio'),
+	        'observacions' => $this->input->post('observacions'),
+		);
+
+		$this->db->insert('diary', $event);
+	}
+
 }

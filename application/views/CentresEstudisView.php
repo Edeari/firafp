@@ -231,9 +231,3 @@ app.controller('CentresEstudis', function($scope) {
 
 });
 </script>
-
-<script>
-$(document).ready(function(){
-    $('[data-toggle="tooltip"]').tooltip();
-});
-</script>

@@ -9,6 +9,8 @@ class UsersModel extends CI_Model {
 	}
 
 	public function getAllUsers(){
+		$names = array('super');
+		$this->db->where_not_in('username', $names);
 		$query = $this->db->get('users');
 		$data = $query->result_array();
 
